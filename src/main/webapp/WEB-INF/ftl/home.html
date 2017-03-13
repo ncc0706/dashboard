@@ -1,0 +1,30 @@
+<@layout.put block="content">
+<!-- 放到父页面 子页面也是没发引用. -->
+<#assign  security=JspTaglibs["/WEB-INF/tlds/security.tld"] />
+
+<div class="row">
+<div class="panel panel-default">
+    <div class="panel-body">
+    	<p>${title} --this is a springmvc value.</p>
+    	<p>${message} -- this is freemarker assign value.</p>
+		<@security.authorize access="hasRole('ADMIN')">
+		  	管理员
+		</@security.authorize>
+		
+		<@security.authorize access="hasRole('USER')">
+		  	普通用户
+		</@security.authorize>
+		    
+		<@security.authorize access="isAuthenticated()">
+		    <span>logged in as <@security.authentication property="principal.username" /></span> 
+		</@security.authorize>
+		
+		<@security.authorize access="! isAuthenticated()">
+		    Not logged in
+		</@security.authorize>
+    </div>
+</div>
+   
+</div>
+</@layout.put>
+<@layout.extends name="layouts/dashboard.html" />

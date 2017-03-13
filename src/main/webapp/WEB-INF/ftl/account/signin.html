@@ -1,0 +1,31 @@
+<@layout.put block="content">
+<div class="full-height">
+      <div class="center-wrapper">
+        <div class="center-content">
+          <div class="row no-margin">
+            <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+              <form role="form" action="${base}/login" class="form-layout" method="post">
+                <div class="text-center mb15">
+                  <img src="${base}/assets/images/logo-dark.png" />
+                </div>
+                <p class="text-center mb30">Welcome to Urban. Please sign in to your account</p>
+                
+                <div class="form-inputs">
+                  <input type="text"  name="username" class="form-control input-lg" placeholder="username" autofocus> 
+                  <input type="password"  name="password" class="form-control input-lg" placeholder="password">
+                </div>
+                <button class="btn btn-success btn-block btn-lg mb15" type="submit">
+                  <span>Sign in</span>
+                </button>
+                <p>
+                  <a href="extras-signup.html">Create an account</a> ·
+                  <a href="extras-forgot.html">Forgot your password?</a>
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</@layout.put>
+<@layout.extends name="layouts/public.html" />

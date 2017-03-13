@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<#assign  security=JspTaglibs["/WEB-INF/tlds/security.tld"] />
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>${title}</title>
+<link rel="shortcut icon" href="${base}/assets/favicon.ico">
+<!-- build:css({.tmp,app}) styles/app.min.css -->
+<link rel="stylesheet" href="${base}/assets/vendor/bootstrap/dist/css/bootstrap.css">
+<link rel="stylesheet" href="${base}/assets/vendor/perfect-scrollbar/css/perfect-scrollbar.css">
+<link rel="stylesheet" href="${base}/assets/styles/roboto.css">
+<link rel="stylesheet" href="${base}/assets/styles/font-awesome.css">
+<link rel="stylesheet" href="${base}/assets/styles/panel.css">
+<link rel="stylesheet" href="${base}/assets/styles/feather.css">
+<link rel="stylesheet" href="${base}/assets/styles/animate.css">
+<link rel="stylesheet" href="${base}/assets/styles/urban.css">
+<link rel="stylesheet" href="${base}/assets/styles/urban.skins.css">
+<!-- endbuild -->
+<!-- build:js({.tmp,app}) scripts/app.min.js -->
+<script src="${base}/assets/scripts/extentions/modernizr.js"></script>
+<script src="${base}/assets/vendor/jquery/dist/jquery.js"></script>
+<script src="${base}/assets/scripts/jquery.pjax.js"></script>
+
+</head>
+<body>
+<div class="app layout-fixed-header">
+	<#--
+	-->
+  	<#include "/common/menu.html"/>
+    <!-- content panel -->
+    <#-- title的原因 将id放到这里 -->
+    <div class="main-panel"  id="container">
+    <#include "/common/header.html"/>
+      <!-- main area -->
+      <div class="main-content">
+      <#assign message="This is a test message"/>
+      	<@layout.block name="content"></@layout.block>
+      </div>
+      <!-- /main area -->
+    </div>
+    <!-- /content panel -->
+    <#include "/common/footer.html"/> 
+    <#--
+    -->
+    <#--
+    <#include "/common/chat.html"/> 
+    -->
+</div>
+<script src="${base}/assets/vendor/bootstrap/dist/js/bootstrap.js"></script>
+<script src="${base}/assets/vendor/jquery.easing/jquery.easing.js"></script>
+<script src="${base}/assets/vendor/fastclick/lib/fastclick.js"></script>
+<script src="${base}/assets/vendor/onScreen/jquery.onscreen.js"></script>
+<script src="${base}/assets/vendor/jquery-countTo/jquery.countTo.js"></script>
+<script src="${base}/assets/vendor/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+<script src="${base}/assets/scripts/ui/accordion.js"></script>
+<script src="${base}/assets/scripts/ui/animate.js"></script>
+<script src="${base}/assets/scripts/ui/link-transition.js"></script>
+<script src="${base}/assets/scripts/ui/panel-controls.js"></script>
+<script src="${base}/assets/scripts/ui/preloader.js"></script>
+<script src="${base}/assets/scripts/ui/toggle.js"></script>
+<script src="${base}/assets/scripts/urban-constants.js"></script>
+<script src="${base}/assets/scripts/extentions/lib.js"></script>
+<!-- endbuild -->
+<script type="text/javascript">
+var psTarg = $('.sidebar-panel > nav');
+
+function updateScrollbars () {
+    if (psTarg.hasClass('ps-container')) {
+      psTarg.perfectScrollbar('update');
+    }
+}
+function bindLeft(){
+	const uri = '${uri}';
+	$('.sidebar-panel nav a').each(function(){
+		const href = $(this).attr('href');
+		if(uri == href){
+			let $this = $(this);
+			let linkActive = $this.parent('');
+			linkActive.addClass('active');
+			
+			let pp = $this.parent().parent().parent();
+			pp.addClass('open');
+		}
+	});
+}
+$(function() {
+	 if($.support.pjax){
+         $(document).pjax('a[data-pjax]', '#container', {
+             maxCacheLength:0,
+             push:false,
+             replace:true,
+             fragment: '#container',
+             timeout: 8000
+         });
+         
+         bindLeft();
+     }else{
+         alert("not support pjax")
+     }
+});
+</script>    
+</body>
+</html>
